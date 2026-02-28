@@ -21,13 +21,10 @@ const { MiniProgramLoginSession } = require('../services/qrlogin');
 const { getSchedulerRegistrySnapshot } = require('../services/scheduler');
 const { 
     hashPassword: secureHash, 
-    verifyPassword, 
-    checkPasswordStrength,
+    verifyPassword,
     rateLimitMiddleware,
     recordLoginAttempts,
-    clearLoginAttempts,
-    generateSessionToken,
-    verifySessionToken,
+    clearLoginAttempts
 } = require('../services/security');
 
 const hashPassword = (pwd) => secureHash(pwd); // 兼容旧接口

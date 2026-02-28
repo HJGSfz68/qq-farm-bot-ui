@@ -78,7 +78,7 @@ function getRewardSummary(items) {
 /**
  * 获取详细奖励摘要
  * @param {Array} items - 物品列表
- * @returns {Object} 详细奖励信息
+ * @returns {object} 详细奖励信息
  */
 function getDetailedRewardSummary(items) {
     const list = Array.isArray(items) ? items : [];
@@ -114,7 +114,7 @@ function getDetailedRewardSummary(items) {
 /**
  * 判断是否为"已领取"错误
  * @param {Error|string} error - 错误对象或消息
- * @returns {boolean}
+ * @returns {boolean} 是否为已领取错误
  */
 function isAlreadyClaimedError(error) {
     const msg = String(error && (error.message) || '');
@@ -131,7 +131,7 @@ function isAlreadyClaimedError(error) {
 /**
  * 判断是否为"余额不足"错误
  * @param {Error|string} error - 错误对象或消息
- * @returns {boolean}
+ * @returns {boolean} 是否为余额不足错误
  */
 function isInsufficientBalanceError(error) {
     const msg = String((error && (error.message || error)) || '');
@@ -144,7 +144,7 @@ function isInsufficientBalanceError(error) {
 /**
  * 判断是否为参数错误
  * @param {Error|string} error - 错误对象或消息
- * @returns {boolean}
+ * @returns {boolean} 是否为参数错误
  */
 function isParamError(error) {
     const msg = String((error && (error.message || error)) || '');
@@ -156,7 +156,7 @@ function isParamError(error) {
 
 /**
  * 创建每日Cooldown管理器
- * @param {Object} options - 配置
+ * @param {object} options - 配置
  * @param {number} options.cooldownMs - 冷却时间(ms)
  */
 function createDailyCooldown(options = {}) {
@@ -169,7 +169,7 @@ function createDailyCooldown(options = {}) {
         /**
          * 检查是否可以执行
          * @param {boolean} force - 是否强制执行
-         * @returns {boolean}
+         * @returns {boolean} 是否可以执行
          */
         canRun(force = false) {
             const now = Date.now();
@@ -316,7 +316,7 @@ function createDailyTaskManager(options = {}) {
  * @param {Promise} promise - 原Promise
  * @param {number} ms - 超时时间(ms)
  * @param {string} errorMessage - 超时错误消息
- * @returns {Promise}
+ * @returns {Promise} 带超时的Promise
  */
 function withTimeout(promise, ms, errorMessage = 'Operation timeout') {
     return Promise.race([
@@ -329,18 +329,18 @@ function withTimeout(promise, ms, errorMessage = 'Operation timeout') {
 
 /**
  * 带重试的异步函数
- * @param {Function} fn -  @param {Object异步函数
- *} options - 配置
+ * @param {Function} fn - 异步函数
+ * @param {object} options - 配置
  * @param {number} options.maxRetries - 最大重试次数
  * @param {number} options.retryDelay - 重试延迟(ms)
  * @param {Function} options.shouldRetry - 判断是否重试的函数
- * @returns {Promise}
+ * @returns {Promise} 带重试的Promise
  */
 async function withRetry(fn, options = {}) {
     const {
         maxRetries = 3,
         retryDelay = 1000,
-        shouldRetry = (error) => true,
+        shouldRetry = (_error) => true,
     } = options;
     
     let lastError;
@@ -399,9 +399,9 @@ function createRateLimiter(maxPerSecond = 10) {
 
 /**
  * 深度合并对象
- * @param {Object} target - 目标对象
- * @param {...Object} sources - 源对象
- * @returns {Object}
+ * @param {object} target - 目标对象
+ * @param {...object} sources - 源对象
+ * @returns {object} 合并后的对象
  */
 function deepMerge(target, ...sources) {
     if (!sources.length) return target;
@@ -427,10 +427,10 @@ function isObject(item) {
 
 /**
  * 安全地获取嵌套属性
- * @param {Object} obj - 对象
+ * @param {object} obj - 对象
  * @param {string} path - 属性路径 (如 'a.b.c')
  * @param {*} defaultValue - 默认值
- * @returns {*}
+ * @returns {*} 嵌套属性的值
  */
 function get(obj, path, defaultValue = undefined) {
     const keys = path.split('.');
@@ -446,7 +446,7 @@ function get(obj, path, defaultValue = undefined) {
 
 /**
  * 安全地设置嵌套属性
- * @param {Object} obj - 对象
+ * @param {object} obj - 对象
  * @param {string} path - 属性路径
  * @param {*} value - 值
  */

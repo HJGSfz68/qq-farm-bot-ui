@@ -67,7 +67,7 @@ async function verifyPassword(password, storedHash) {
             if (parts.length !== 5) return false;
             
             const salt = parts[2];
-            const iterations = parseInt(parts[3], 10);
+            const iterations = Number.parseInt(parts[3], 10);
             const hash = parts[4];
             const keyLength = 64;
             const digest = 'sha512';
@@ -134,8 +134,8 @@ function checkPasswordStrength(password) {
 
     if (/[a-z]/.test(password)) score += 1;
     if (/[A-Z]/.test(password)) score += 1;
-    if (/[0-9]/.test(password)) score += 1;
-    if (/[^a-zA-Z0-9]/.test(password)) score += 1;
+    if (/\d/.test(password)) score += 1;
+    if (/[^a-z0-9]/i.test(password)) score += 1;
 
     // 检查常见弱密码
     const commonPasswords = [

@@ -134,7 +134,7 @@ class RequestQueue {
                         error: error.message 
                     });
                     await sleep(DEFAULT_CONFIG.retryDelay * task.attempts);
-                    this.queue.enqueue(task, -options.priority || 0); // 重新入队
+                    this.queue.enqueue(task, -task.priority || 0); // 重新入队
                 } else {
                     task.reject(error);
                 }
@@ -194,7 +194,7 @@ function getServiceConfig(serviceName) {
         // 通用
         'default': { maxConcurrent: 3, minInterval: 100 },
     };
-    return configs[serviceName] || configs['default'];
+    return configs[serviceName] || configs.default;
 }
 
 // 带重试和并发控制的发送函数

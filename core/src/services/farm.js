@@ -836,7 +836,6 @@ async function runFarmOperation(opType) {
     statusParts.push(`长:${status.growing.length}`);
 
     const actions = [];
-    const batchOps = [];
     const optimizer = getFarmOptimizer();
 
     // 执行除草/虫/水 (使用并发控制)

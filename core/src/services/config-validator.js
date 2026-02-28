@@ -11,14 +11,14 @@ const logger = createModuleLogger('config-validator');
 const VALIDATORS = {
     // 基础类型
     string: (value) => typeof value === 'string',
-    number: (value) => typeof value === 'number' && !isNaN(value),
+    number: (value) => typeof value === 'number' && !Number.isNaN(value),
     boolean: (value) => typeof value === 'boolean',
     array: (value) => Array.isArray(value),
     object: (value) => value !== null && typeof value === 'object' && !Array.isArray(value),
     
     // 数字范围
-    positiveNumber: (value) => typeof value === 'number' && value > 0 && !isNaN(value),
-    nonNegativeNumber: (value) => typeof value === 'number' && value >= 0 && !isNaN(value),
+    positiveNumber: (value) => typeof value === 'number' && value > 0 && !Number.isNaN(value),
+    nonNegativeNumber: (value) => typeof value === 'number' && value >= 0 && !Number.isNaN(value),
     integer: (value) => Number.isInteger(value),
     
     // 字符串限制
@@ -94,12 +94,12 @@ const QUIET_HOURS_SCHEMA = {
         enabled: { type: 'boolean', default: false },
         start: { 
             type: 'string', 
-            pattern: /^([01]?[0-9]|2[0-3]):[0-5][0-9]$/,
+            pattern: /^([01]?\d|2[0-3]):[0-5]\d$/,
             default: '23:00',
         },
         end: { 
             type: 'string', 
-            pattern: /^([01]?[0-9]|2[0-3]):[0-5][0-9]$/,
+            pattern: /^([01]?\d|2[0-3]):[0-5]\d$/,
             default: '07:00',
         },
     },
@@ -223,7 +223,7 @@ class ConfigValidator {
             for (const [key, propSchema] of Object.entries(properties)) {
                 const valuePath = path ? `${path}.${key}` : key;
                 
-                if (value.hasOwnProperty(key)) {
+                if (Object.prototype.hasOwnProperty.call(value, key)) {
                     result[key] = this.validateObject(value[key], propSchema, valuePath);
                 } else if (propSchema.default !== undefined) {
                     result[key] = propSchema.default;

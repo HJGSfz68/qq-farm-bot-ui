@@ -11,21 +11,12 @@ const DAILY_KEY = 'vip_daily_gift';
 const CHECK_COOLDOWN_MS = 10 * 60 * 1000;
 
 let doneDateKey = '';
-let lastCheckAt = 0;
 let lastClaimAt = 0;
 let lastResult = '';
 let lastHasGift = null;
 let lastCanClaim = null;
 
 const dailyCooldown = createDailyCooldown({ cooldownMs: CHECK_COOLDOWN_MS });
-
-function markDoneToday() {
-    doneDateKey = getDateKey();
-}
-
-function isDoneToday() {
-    return doneDateKey === getDateKey();
-}
 
 function markDoneToday() {
     doneDateKey = getDateKey();

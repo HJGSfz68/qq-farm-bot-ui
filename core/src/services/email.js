@@ -4,12 +4,11 @@
 
 const { sendMsgAsync } = require('../utils/network');
 const { types } = require('../utils/proto');
-const { log, toNum } = require('../utils/utils');
+const { log } = require('../utils/utils');
 const { getDateKey, getRewardSummary, createDailyCooldown } = require('./common');
 
 const DAILY_KEY = 'email_rewards';
 let doneDateKey = '';
-let lastCheckAt = 0;
 
 // 一天检查一次（24小时冷却，跨日后自动重置）
 const dailyCooldown = createDailyCooldown({ cooldownMs: 24 * 60 * 60 * 1000 });

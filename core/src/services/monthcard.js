@@ -5,13 +5,12 @@
 const { sendMsgAsync } = require('../utils/network');
 const { types } = require('../utils/proto');
 const { log } = require('../utils/utils');
-const { getDateKey, getRewardSummary, isAlreadyClaimedError, createDailyCooldown } = require('./common');
+const { getDateKey, getRewardSummary,createDailyCooldown } = require('./common');
 
 const DAILY_KEY = 'month_card_gift';
 const CHECK_COOLDOWN_MS = 10 * 60 * 1000;
 
 let doneDateKey = '';
-let lastCheckAt = 0;
 let lastClaimAt = 0;
 let lastResult = '';
 let lastHasCard = null;

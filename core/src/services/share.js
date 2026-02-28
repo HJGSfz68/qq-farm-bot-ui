@@ -11,7 +11,7 @@ const DAILY_KEY = 'daily_share';
 const CHECK_COOLDOWN_MS = 10 * 60 * 1000;
 
 let doneDateKey = '';
-let lastCheckAt = 0;
+const lastCheckAt = 0;
 let lastClaimAt = 0;
 
 const dailyCooldown = createDailyCooldown({ cooldownMs: CHECK_COOLDOWN_MS });

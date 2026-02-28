@@ -39,10 +39,7 @@ class TimerNode {
 class TimeWheel {
     constructor(size) {
         this.size = size;
-        this.buckets = new Array(size);
-        for (let i = 0; i < size; i++) {
-            this.buckets[i] = [];
-        }
+        this.buckets = Array.from({ length: size }, () => []);
         this.currentIndex = 0;
     }
 
@@ -148,7 +145,7 @@ class OptimizedScheduler {
 
     // 执行任务
     async executeTask(node) {
-        const { taskName, taskFn, options, executeAt, runCount } = node;
+        const { taskName, taskFn, options } = node;
         
         // 防重入检查
         if (options.preventOverlap && node.running) {

@@ -7,7 +7,7 @@ const { Buffer } = require('node:buffer');
 const { sendMsgAsync, getUserState } = require('../utils/network');
 const { types } = require('../utils/proto');
 const { toNum, log, sleep } = require('../utils/utils');
-const { getDateKey, getRewardSummary, createDailyCooldown, isInsufficientBalanceError } = require('./common');
+const { getDateKey, createDailyCooldown } = require('./common');
 
 const ORGANIC_FERTILIZER_MALL_GOODS_ID = 1002;
 const BUY_COOLDOWN_MS = 10 * 60 * 1000;
@@ -21,7 +21,6 @@ let buyLastSuccessAt = 0;
 let buyPausedNoGoldDateKey = '';
 let freeGiftDoneDateKey = '';
 let freeGiftLastAt = 0;
-let freeGiftLastCheckAt = 0;
 
 const freeGiftCooldown = createDailyCooldown({ cooldownMs: BUY_COOLDOWN_MS });
 
@@ -152,10 +151,6 @@ async function autoBuyOrganicFertilizer(force = false) {
     } catch {
         return 0;
     }
-}
-
-function isDoneTodayByKey(key) {
-    return String(key || '') === getDateKey();
 }
 
 async function buyFreeGifts(force = false) {

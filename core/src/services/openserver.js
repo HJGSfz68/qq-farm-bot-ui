@@ -11,7 +11,6 @@ const DAILY_KEY = 'open_server_gift';
 const CHECK_COOLDOWN_MS = 10 * 60 * 1000;
 
 let doneDateKey = '';
-let lastCheckAt = 0;
 let lastClaimAt = 0;
 let lastResult = '';
 let lastHasClaimable = null;
